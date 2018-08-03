@@ -3,12 +3,21 @@ package quiz.basic;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 public class Quiz1 {
 
 	class ProductInfo {
+		public String getCode() {
+			return code;
+		}
+
+		public String getName() {
+			return name;
+		}
+
 		final String code;
 		final String name;
 
@@ -32,6 +41,14 @@ public class Quiz1 {
 			this.stock = stock;
 		}
 
+		public String getProductCode() {
+			return productCode;
+		}
+
+		public int getStock() {
+			return stock;
+		}
+
 		@Override
 		public String toString() {
 			return "ProductStock [productCode=" + productCode + ", stock=" + stock + "]";
@@ -39,6 +56,14 @@ public class Quiz1 {
 	}
 
 	class ProductImage {
+		public String getProductCode() {
+			return productCode;
+		}
+
+		public String getUrl() {
+			return url;
+		}
+
 		final String productCode;
 		final String url;
 
@@ -107,6 +132,23 @@ public class Quiz1 {
 
 		List<Product> products = new ArrayList<>();
 		// TODO Add your logic below here
+		for (int i=0; i < infos.toArray().length; i++) {
+			List<ProductImage> images2 = new ArrayList<>();
+			int imageIdx = 0;
+			for (int j=0; j < images.toArray().length; j++) {
+				if (images.get(j).getProductCode() == infos.get(i).getCode()) {
+					images2.add(images.get(j));
+					System.out.println(images2);
+				} 
+			}
+			ProductStock stock = null;
+			for (int y=0; y < stocks.toArray().length; y++) {
+				if (stocks.get(y).getProductCode() == infos.get(i).getCode()) {
+					stock = stocks.get(y);
+				}
+			}
+			products.add(new Product(infos.get(i).getCode(), infos.get(i).getName(), stock, images2.toArray(new ProductImage[0])));
+		}
 
 		return products;
 	}
